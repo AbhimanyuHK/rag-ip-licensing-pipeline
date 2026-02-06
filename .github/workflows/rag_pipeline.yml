@@ -21,10 +21,13 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Install Ollama
+      - name: Install and start Ollama
         run: |
           curl -fsSL https://ollama.com/install.sh | sh
+          nohup ollama serve > ollama.log 2>&1 &
+          sleep 5
           ollama pull mistral
+
 
       - name: Run RAG pipeline
         run: |
