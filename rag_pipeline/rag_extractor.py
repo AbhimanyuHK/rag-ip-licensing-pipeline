@@ -1,16 +1,28 @@
-from langchain.chat_models import ChatOpenAI
+from langchain.llms import Ollama
 from langchain.prompts import PromptTemplate
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm = Ollama(model="mistral")
 
-def extract_license(chunks):
-    prompt = PromptTemplate(
-        input_variables=["text"],
-        template="""
-Extract IP licensing terms and return valid JSON:
+PROMPT = """
+You are a legal extraction engine.
+
+Extract IP licensing details and return ONLY valid JSON.
+
+Required fields:
+- license_id
+- territory
+- term
+- royalty.rate
+- royalty.basis
+- sub_licensing
+
+Text:
 {text}
 """
+
+def extract(chunks):
+    prompt = PromptTemplate(
+        input_variables=["text"],
+        template=PROMPT
     )
-    combined_text = "\n".join(chunks[:5])
-    response = llm.predict(prompt.format(text=combined_text))
-    return response
+    return llm(prompt.format(text="\n".join(chunks)))
