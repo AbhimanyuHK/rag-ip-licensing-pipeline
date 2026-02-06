@@ -1,8 +1,6 @@
 langchain
-openai
-pydantic
-python-docx
-pdfplumber
-pytesseract
-tiktoken
+sentence-transformers
 faiss-cpu
+pdfplumber
+python-docx
+pydantic
