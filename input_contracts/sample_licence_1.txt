@@ -18,6 +18,9 @@ having its principal place of business at 1207 Market Street, Suite 400, Wilming
 
 Licensor and Licensee may be referred to individually as a “Party” and collectively as the “Parties.”
 
+license_id is ABCD1234
+
+
 1. DEFINITIONS
 
 1.1 “Intellectual Property” means all copyrights, software source code, audiovisual content, trademarks, brand assets, documentation, and proprietary materials owned by the Licensor, as more particularly described in Schedule A.
