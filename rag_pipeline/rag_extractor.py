@@ -1,7 +1,10 @@
-from langchain.llms import Ollama
+from langchain_ollama import Ollama
 from langchain.prompts import PromptTemplate
 
-llm = Ollama(model="mistral")
+llm = Ollama(
+    model="mistral",
+    temperature=0
+)
 
 PROMPT = """
 You are a legal extraction engine.
@@ -25,4 +28,4 @@ def extract(chunks):
         input_variables=["text"],
         template=PROMPT
     )
-    return llm(prompt.format(text="\n".join(chunks)))
+    return llm.invoke(prompt.format(text="\n".join(chunks)))
