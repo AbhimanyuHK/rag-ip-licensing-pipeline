@@ -117,3 +117,4 @@ Type of IP: Software, Audiovisual Content, Brand Assets
 Version: v3.2
 
 Description: Proprietary digital streaming software, original audiovisual content, UI designs, and associated documentation developed and owned by the Licensor.
+
