@@ -1,7 +1,7 @@
-from langchain_ollama import Ollama
+from langchain_ollama import ChatOllama
 from langchain.prompts import PromptTemplate
 
-llm = Ollama(
+llm = ChatOllama(
     model="mistral",
     temperature=0
 )
@@ -28,4 +28,10 @@ def extract(chunks):
         input_variables=["text"],
         template=PROMPT
     )
-    return llm.invoke(prompt.format(text="\n".join(chunks)))
+
+    response = llm.invoke(
+        prompt.format(text="\n".join(chunks))
+    )
+
+    # Chat models return message objects
+    return response.content
