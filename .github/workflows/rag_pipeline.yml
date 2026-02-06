@@ -6,32 +6,34 @@ on:
       - "input_contracts/**"
 
 jobs:
-  run-rag:
+  rag:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
+      - name: Install Python deps
         run: |
           pip install -r requirements.txt
 
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama pull mistral
+
       - name: Run RAG pipeline
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python rag_pipeline/main.py
 
-      - name: Commit outputs
+      - name: Commit output JSON
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add output_json/
-          git commit -m "Auto-generated contract JSON"
+          git commit -m "Auto-generated IP license JSON" || echo "No changes"
           git push
