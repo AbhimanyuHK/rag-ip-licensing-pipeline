@@ -1,7 +1,7 @@
 import os, json
-from loaders import load_pdf, load_docx, load_txt
+from loaders import load_file
 from chunker import chunk_text
-from rag_extractor import extract_license
+from rag_extractor import extract
 
 INPUT_DIR = "input_contracts"
 OUTPUT_DIR = "output_json"
@@ -10,16 +10,13 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 for file in os.listdir(INPUT_DIR):
     path = f"{INPUT_DIR}/{file}"
-
-    if file.endswith(".pdf"):
-        text = load_pdf(path)
-    elif file.endswith(".docx"):
-        text = load_docx(path)
-    else:
-        text = load_txt(path)
-
+    text = load_file(path)
     chunks = chunk_text(text)
-    result = extract_license(chunks)
 
-    with open(f"{OUTPUT_DIR}/{file}.json", "w") as f:
+    result = extract(chunks)
+
+    out_path = f"{OUTPUT_DIR}/{file}.json"
+    with open(out_path, "w", encoding="utf-8") as f:
         f.write(result)
+
+    print(f"Generated: {out_path}")
