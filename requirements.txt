@@ -1,0 +1,8 @@
+langchain
+openai
+pydantic
+python-docx
+pdfplumber
+pytesseract
+tiktoken
+faiss-cpu
