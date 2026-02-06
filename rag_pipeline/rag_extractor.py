@@ -5,8 +5,8 @@ from langchain_core.prompts import ChatPromptTemplate
 
 def extract(context: str) -> dict:
     llm = ChatOllama(
-        model="llama3",
-        base_url="http://127.0.0.1:11434"
+        model="mistral",
+        temperature=0
     )
 
     prompt = ChatPromptTemplate.from_template("""
