@@ -1,4 +1,5 @@
 langchain
+langchain-ollama
 sentence-transformers
 faiss-cpu
 pdfplumber
